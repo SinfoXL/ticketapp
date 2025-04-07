@@ -1,7 +1,7 @@
 export interface Project {
     id: string;
     name: string;
-    description?: string;
+    description?: string | null; // Allow null values for description
     companyId: string;
     createdAt: Date;
     updatedAt: Date;

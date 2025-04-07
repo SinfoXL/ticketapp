@@ -1,5 +1,6 @@
 import { Database } from '../../database/instance';
 import { ProjectQueryRequest, Project } from './def.types';
+import { buildWhereClause } from '../../helpers/buildWhereClause';
 
 export class ProjectsDataAccess {
     private db: Database;
@@ -8,22 +9,10 @@ export class ProjectsDataAccess {
         this.db = Database.getInstance();
     }
 
-    private buildWhereClause(filters: ProjectQueryRequest['filters'] = {}): Partial<Project> {
-        const whereClause: Partial<Project> = {};
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value !== undefined) {
-                whereClause[key as keyof Project] = value;
-            }
-        });
-        return whereClause;
-    }
-
-    getProjects = async (filters: ProjectQueryRequest['filters'], pagination: ProjectQueryRequest['pagination']): Promise<Project[]> => {
-        const page = pagination?.page || 1;
-        const limit = pagination?.limit || 10;
-
+    getProjects = async (filters: ProjectQueryRequest['filters'] = {}, pagination: ProjectQueryRequest['pagination'] = {}): Promise<Project[]> => {
+        const { page = 1, limit = 10 } = pagination;
         return await this.db.project.findMany({
-            where: this.buildWhereClause(filters),
+            where: buildWhereClause<Project>(filters),
             take: limit,
             skip: (page - 1) * limit,
         });

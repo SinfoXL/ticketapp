@@ -4,7 +4,7 @@ export interface User {
     email: string;
     passwordHash: string;
     roleId: string;
-    companyId?: string;
+    companyId: string | null; // Cambiado: antes era `string | undefined`
     active: boolean;
     createdAt: Date;
     updatedAt: Date;

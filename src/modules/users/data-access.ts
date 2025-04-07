@@ -1,5 +1,6 @@
 import { Database } from '../../database/instance';
 import { UserQueryRequest, User } from './def.types';
+import { buildWhereClause } from '../../helpers/buildWhereClause';
 
 export class UsersDataAccess {
     private db: Database;
@@ -8,41 +9,27 @@ export class UsersDataAccess {
         this.db = Database.getInstance();
     }
 
-    private buildWhereClause(filters: UserQueryRequest['filters'] = {}): Partial<User> {
-        const whereClause: Partial<User> = {};
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value !== undefined) {
-                whereClause[key as keyof User] = value;
-            }
-        });
-        return whereClause;
-    }
-
-    getUsers = async (filters: UserQueryRequest['filters'], pagination: UserQueryRequest['pagination']): Promise<User[]> => {
-        const page = pagination?.page || 1;
-        const limit = pagination?.limit || 10;
-
+    getUsers = async (filters: UserQueryRequest['filters'] = {}, pagination: UserQueryRequest['pagination'] = {}): Promise<User[]> => {
+        const { page = 1, limit = 10 } = pagination;
         return await this.db.user.findMany({
-            where: this.buildWhereClause(filters),
+            where: buildWhereClause<User>(filters),
             take: limit,
             skip: (page - 1) * limit,
         });
     };
 
     saveUsers = async (users: User[]): Promise<User[]> => {
-        const usersSaved = await this.db.user.createManyAndReturn({
+        return await this.db.user.createManyAndReturn({
             data: users,
             skipDuplicates: true,
         });
-        return usersSaved;
     };
 
     updateUser = async (id: string, data: Partial<User>): Promise<User> => {
-        const userUpdated = await this.db.user.update({
+        return await this.db.user.update({
             where: { id },
             data,
         });
-        return userUpdated;
     };
 
     deleteUser = async (id: string): Promise<void> => {

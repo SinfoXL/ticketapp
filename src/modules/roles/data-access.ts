@@ -1,5 +1,6 @@
 import { Database } from '../../database/instance';
 import { RoleQueryRequest, Role } from './def.types';
+import { buildWhereClause } from '../../helpers/buildWhereClause';
 
 export class RolesDataAccess {
     private db: Database;
@@ -8,22 +9,10 @@ export class RolesDataAccess {
         this.db = Database.getInstance();
     }
 
-    private buildWhereClause(filters: RoleQueryRequest['filters'] = {}): Partial<Role> {
-        const whereClause: Partial<Role> = {};
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value !== undefined) {
-                whereClause[key as keyof Role] = value;
-            }
-        });
-        return whereClause;
-    }
-
-    getRoles = async (filters: RoleQueryRequest['filters'], pagination: RoleQueryRequest['pagination']): Promise<Role[]> => {
-        const page = pagination?.page || 1;
-        const limit = pagination?.limit || 10;
-
+    getRoles = async (filters: RoleQueryRequest['filters'] = {}, pagination: RoleQueryRequest['pagination'] = {}): Promise<Role[]> => {
+        const { page = 1, limit = 10 } = pagination;
         return await this.db.role.findMany({
-            where: this.buildWhereClause(filters),
+            where: buildWhereClause<Role>(filters),
             take: limit,
             skip: (page - 1) * limit,
         });
@@ -47,9 +36,7 @@ export class RolesDataAccess {
 
     deleteRoles = async (id: string): Promise<void> => {
         await this.db.role.delete({
-            where: {
-                id,
-            },
+            where: { id },
         });
         return;
     };
