@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String             @id @default(uuid())
+  name            String
+  email           String             @unique
+  passwordHash    String
+  role            Role               @relation(fields: [roleId], references: [id])
+  roleId          String
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  createdTickets  Ticket[]           @relation("CreatedTickets")
+  assignedTickets Ticket[]           @relation("AssignedTickets")
+  comments        TicketComment[]
+  attachments     TicketAttachment[]
+  historyLogs     TicketHistory[]
+  Company         Company?           @relation(fields: [companyId], references: [id])
+  companyId       String?
+  ProjectClient   ProjectClient[]
+  active          Boolean            @default(true)
+}
+
+model Role {
+  id    String @id @default(uuid())
+  name  String
+  users User[]
+}
+
+model Company {
+  id           String    @id @default(uuid())
+  name         String
+  parentId     String?
+  parent       Company?  @relation("CompanyHierarchy", fields: [parentId], references: [id])
+  subsidiaries Company[] @relation("CompanyHierarchy")
+  projects     Project[]
+  users        User[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  Ticket       Ticket[]
+}
+
+model Project {
+  id          String          @id @default(uuid())
+  name        String
+  description String?
+  company     Company         @relation(fields: [companyId], references: [id])
+  companyId   String
+  tickets     Ticket[]
+  clientUsers ProjectClient[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model ProjectClient {
+  id        String   @id @default(uuid())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, userId]) // Evita duplicados
+}
+
+model Ticket {
+  id           String             @id @default(uuid())
+  title        String
+  description  String
+  status       TicketStatus       @relation(fields: [statusId], references: [id])
+  statusId     Int
+  priority     TicketPriority     @relation(fields: [priorityId], references: [id])
+  priorityId   Int
+  category     TicketCategory     @relation(fields: [categoryId], references: [id])
+  categoryId   Int
+  createdBy    User               @relation("CreatedTickets", fields: [createdById], references: [id])
+  createdById  String
+  assignedTo   User?              @relation("AssignedTickets", fields: [assignedToId], references: [id])
+  assignedToId String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  comments     TicketComment[]
+  attachments  TicketAttachment[]
+  historyLogs  TicketHistory[]
+  Company      Company?           @relation(fields: [companyId], references: [id])
+  companyId    String?
+  Project      Project?           @relation(fields: [projectId], references: [id])
+  projectId    String?
+}
+
+model TicketStatus {
+  id      Int      @id @default(autoincrement())
+  name    String
+  tickets Ticket[]
+}
+
+model TicketPriority {
+  id      Int      @id @default(autoincrement())
+  name    String
+  tickets Ticket[]
+}
+
+model TicketCategory {
+  id      Int      @id @default(autoincrement())
+  name    String
+  tickets Ticket[]
+}
+
+model TicketComment {
+  id        String   @id @default(uuid())
+  ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId  String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  comment   String
+  createdAt DateTime @default(now())
+}
+
+model TicketAttachment {
+  id           String   @id @default(uuid())
+  ticket       Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId     String
+  filename     String
+  fileUrl      String
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  uploadedById String
+  uploadedAt   DateTime @default(now())
+}
+
+model TicketHistory {
+  id          String   @id @default(uuid())
+  ticket      Ticket   @relation(fields: [ticketId], references: [id])
+  ticketId    String
+  changedBy   User     @relation(fields: [changedById], references: [id])
+  changedById String
+  changeType  String
+  oldValue    String?
+  newValue    String?
+  createdAt   DateTime @default(now())
+}
