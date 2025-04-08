@@ -1,6 +1,6 @@
 import { Database } from '../../database/instance';
 import { RoleQueryRequest, Role } from './def.types';
-import { buildWhereClause } from '../../helpers/buildWhereClause';
+import { buildWhereClause } from '../../helpers/where-clause';
 
 export class RolesDataAccess {
     private db: Database;
@@ -26,7 +26,7 @@ export class RolesDataAccess {
         return rolesSaved;
     };
 
-    updateRoles = async (id: string, name: string): Promise<Role> => {
+    updateRole = async (id: string, name: string): Promise<Role> => {
         const rolesUpdated = await this.db.role.update({
             where: { id },
             data: name,
@@ -34,7 +34,7 @@ export class RolesDataAccess {
         return rolesUpdated;
     };
 
-    deleteRoles = async (id: string): Promise<void> => {
+    deleteRole = async (id: string): Promise<void> => {
         await this.db.role.delete({
             where: { id },
         });

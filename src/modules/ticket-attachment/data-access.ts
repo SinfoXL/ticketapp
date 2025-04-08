@@ -1,6 +1,6 @@
 import { Database } from '../../database/instance';
 import { TicketAttachmentQueryRequest, TicketAttachment } from './def.types';
-import { buildWhereClause } from '../../helpers/buildWhereClause';
+import { buildWhereClause } from '../../helpers/where-clause';
 
 export class TicketAttachmentDataAccess {
     private db: Database;

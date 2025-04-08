@@ -1,6 +1,6 @@
 import { Database } from '../../database/instance';
 import { TicketQueryRequest, Ticket } from './def.types';
-import { buildWhereClause } from '../../helpers/buildWhereClause';
+import { buildWhereClause } from '../../helpers/where-clause';
 
 export class TicketsDataAccess {
     private db: Database;
@@ -15,18 +15,6 @@ export class TicketsDataAccess {
             where: buildWhereClause<Ticket>(filters),
             take: limit,
             skip: (page - 1) * limit,
-            include: {
-                Project: true,
-                assignedTo: true,
-                createdBy: true,
-                status: true,
-                priority: true,
-                attachments: true,
-                category: true,
-                comments: true,
-                Company: true,
-                historyLogs: true,
-            },
         });
     };
 

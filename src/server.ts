@@ -1,17 +1,8 @@
-import express from 'express';
-import morgan from 'morgan';
-
+import app from './app';
 import { config } from './config/config';
-import { loadRoutes } from './routes-loader';
-
-export const app = express();
-
-//global middleware
-app.use(express.json());
-app.use(morgan('tiny'));
+import { loadRoutes } from './utils/routes-loader';
 
 // Load routes dynamically from modules
-
 loadRoutes(app);
 
 app.listen(config.server.port, () => {

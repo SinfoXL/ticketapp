@@ -1,6 +1,6 @@
 import { Database } from '../../database/instance';
 import { TicketCommentQueryRequest, TicketComment } from './def.types';
-import { buildWhereClause } from '../../helpers/buildWhereClause';
+import { buildWhereClause } from '../../helpers/where-clause';
 
 export class TicketCommentDataAccess {
     private db: Database;

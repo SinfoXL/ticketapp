@@ -1,6 +1,6 @@
 import { Database } from '../../database/instance';
 import { TicketPriorityQueryRequest, TicketPriority } from './def.types';
-import { buildWhereClause } from '../../helpers/buildWhereClause';
+import { buildWhereClause } from '../../helpers/where-clause';
 
 export class TicketPriorityDataAccess {
     private db: Database;

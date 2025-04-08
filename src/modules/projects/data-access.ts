@@ -1,6 +1,6 @@
 import { Database } from '../../database/instance';
 import { ProjectQueryRequest, Project } from './def.types';
-import { buildWhereClause } from '../../helpers/buildWhereClause';
+import { buildWhereClause } from '../../helpers/where-clause';
 
 export class ProjectsDataAccess {
     private db: Database;

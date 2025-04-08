@@ -17,11 +17,11 @@ export class RolesServices {
         return await this.dataAccess.saveRoles(roles);
     };
 
-    updateRoles = async (id: string, name: string): Promise<Role> => {
-        return await this.dataAccess.updateRoles(id, name);
+    updateRole = async (id: string, name: string): Promise<Role> => {
+        return await this.dataAccess.updateRole(id, name);
     };
 
-    deleteRoles = async (id: string): Promise<void> => {
-        return await this.dataAccess.deleteRoles(id);
+    deleteRole = async (id: string): Promise<void> => {
+        return await this.dataAccess.deleteRole(id);
     };
 }
