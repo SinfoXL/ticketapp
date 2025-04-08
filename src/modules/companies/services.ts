@@ -8,8 +8,7 @@ export class CompaniesServices {
         this.dataAccess = new CompaniesDataAccess();
     }
 
-    getCompanies = async (query: CompanyQueryRequest): Promise<Company[]> => {
-        const { filters, pagination } = query;
+    getCompanies = async ({ filters, pagination }: CompanyQueryRequest): Promise<Company[]> => {
         return await this.dataAccess.getCompanies(filters, pagination);
     };
 

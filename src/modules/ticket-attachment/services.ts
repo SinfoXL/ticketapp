@@ -8,8 +8,7 @@ export class TicketAttachmentServices {
         this.dataAccess = new TicketAttachmentDataAccess();
     }
 
-    getTicketAttachments = async (query: TicketAttachmentQueryRequest): Promise<TicketAttachment[]> => {
-        const { filters, pagination } = query;
+    getTicketAttachments = async ({ filters, pagination }: TicketAttachmentQueryRequest): Promise<TicketAttachment[]> => {
         return await this.dataAccess.getTicketAttachments(filters, pagination);
     };
 

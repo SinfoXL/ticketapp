@@ -8,8 +8,7 @@ export class TicketCommentServices {
         this.dataAccess = new TicketCommentDataAccess();
     }
 
-    getTicketComments = async (query: TicketCommentQueryRequest): Promise<TicketComment[]> => {
-        const { filters, pagination } = query;
+    getTicketComments = async ({ filters, pagination }: TicketCommentQueryRequest): Promise<TicketComment[]> => {
         return await this.dataAccess.getTicketComments(filters, pagination);
     };
 

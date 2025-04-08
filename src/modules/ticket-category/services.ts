@@ -8,8 +8,7 @@ export class TicketCategoryServices {
         this.dataAccess = new TicketCategoryDataAccess();
     }
 
-    getTicketCategories = async (query: TicketCategoryQueryRequest): Promise<TicketCategory[]> => {
-        const { filters, pagination } = query;
+    getTicketCategories = async ({ filters, pagination }: TicketCategoryQueryRequest): Promise<TicketCategory[]> => {
         return await this.dataAccess.getTicketCategories(filters, pagination);
     };
 

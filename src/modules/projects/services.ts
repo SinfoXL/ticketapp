@@ -8,8 +8,7 @@ export class ProjectsServices {
         this.dataAccess = new ProjectsDataAccess();
     }
 
-    getProjects = async (query: ProjectQueryRequest): Promise<Project[]> => {
-        const { filters, pagination } = query;
+    getProjects = async ({ filters, pagination }: ProjectQueryRequest): Promise<Project[]> => {
         return await this.dataAccess.getProjects(filters, pagination);
     };
 

@@ -8,8 +8,7 @@ export class TicketPriorityServices {
         this.dataAccess = new TicketPriorityDataAccess();
     }
 
-    getTicketPriorities = async (query: TicketPriorityQueryRequest): Promise<TicketPriority[]> => {
-        const { filters, pagination } = query;
+    getTicketPriorities = async ({ filters, pagination }: TicketPriorityQueryRequest): Promise<TicketPriority[]> => {
         return await this.dataAccess.getTicketPriorities(filters, pagination);
     };
 

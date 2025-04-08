@@ -15,6 +15,18 @@ export class TicketsDataAccess {
             where: buildWhereClause<Ticket>(filters),
             take: limit,
             skip: (page - 1) * limit,
+            include: {
+                Project: true,
+                assignedTo: true,
+                createdBy: true,
+                status: true,
+                priority: true,
+                attachments: true,
+                category: true,
+                comments: true,
+                Company: true,
+                historyLogs: true,
+            },
         });
     };
 

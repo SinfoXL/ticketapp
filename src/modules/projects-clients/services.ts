@@ -8,8 +8,7 @@ export class ProjectClientsServices {
         this.dataAccess = new ProjectClientsDataAccess();
     }
 
-    getProjectClients = async (query: ProjectClientQueryRequest): Promise<ProjectClient[]> => {
-        const { filters, pagination } = query;
+    getProjectClients = async ({ filters, pagination }: ProjectClientQueryRequest): Promise<ProjectClient[]> => {
         return await this.dataAccess.getProjectClients(filters, pagination);
     };
 

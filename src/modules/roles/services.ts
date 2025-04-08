@@ -9,8 +9,7 @@ export class RolesServices {
     }
 
     // Example method
-    getRoles = async (query: RoleQueryRequest): Promise<Role[]> => {
-        const { filters, pagination } = query;
+    getRoles = async ({filters, pagination}: RoleQueryRequest): Promise<Role[]> => {
         return await this.dataAccess.getRoles(filters, pagination);
     };
 
