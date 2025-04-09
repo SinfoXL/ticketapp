@@ -2,9 +2,17 @@ import { ApolloServer, BaseContext } from '@apollo/server';
 import { typeDefs, resolvers } from './utils/graphql-loader';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
-async function bootstrapApolloServer() {
-    const apolloServer = new ApolloServer<BaseContext>({ typeDefs, resolvers });
-    const { url } = await startStandaloneServer(apolloServer);
-    console.log(`🚀  graphql Server ready at: ${url}`);
+export class GraphQLServer {
+    private apolloServer: ApolloServer<BaseContext>;
+    public url: string = '';
+
+    constructor() {
+        this.apolloServer = new ApolloServer<BaseContext>({ typeDefs, resolvers });
+    }
+
+    public async start(): Promise<void> {
+        const { url } = await startStandaloneServer(this.apolloServer);
+        if (!url) throw new Error('Failed to start GraphQL server');
+        this.url = url;
+    }
 }
-bootstrapApolloServer(); //pnpm ts-node src/graphql-server.ts

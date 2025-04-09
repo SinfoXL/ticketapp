@@ -36,7 +36,7 @@ export class RolesController {
         const name: string = req.body;
         const id = req.params.id;
 
-        const roleUpdated = await this.service.updateRoles(id, name);
+        const roleUpdated = await this.service.updateRole(id, name);
 
         if (!roleUpdated) NotFound(res, 'Roles not found');
         Ok(res, roleUpdated);
@@ -45,7 +45,7 @@ export class RolesController {
     deleteRoles = async (req: Request, res: Response): Promise<void> => {
         // Logic to delete roles
         const { id } = req.params;
-        await this.service.deleteRoles(id);
+        await this.service.deleteRole(id);
         Ok(res, id);
     };
 }

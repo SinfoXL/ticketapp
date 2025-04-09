@@ -1,10 +1,21 @@
+import http from 'http';
 import app from './app';
 import { config } from './config/config';
-import { loadRoutes } from './utils/routes-loader';
+import { WebSocketServer } from './ws-server';
+import { GraphQLServer } from './graphql-server';
 
-// Load routes dynamically from modules
-loadRoutes(app);
+export const server = http.createServer(app);
+export const socketServer = new WebSocketServer(server);
 
-app.listen(config.server.port, () => {
-    console.log(`Server is running on http://${config.server.host}:${config.server.port}`);
-});
+const bootstrapGraphqlServer = async () => {
+    const graphqlServer = new GraphQLServer();
+    await graphqlServer.start();
+
+    server.listen(config.server.port, () => {
+        console.log(`💻 Http Server is running on http://${config.server.host}:${config.server.port}`);
+        console.log(`🚀 Graphql Server ready at: ${graphqlServer.url}`);
+        console.log(`💬 WebSocket Server ready at: ws://${config.server.host}:${config.server.port}`);
+    });
+};
+
+bootstrapGraphqlServer();
