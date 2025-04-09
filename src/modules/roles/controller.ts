@@ -33,7 +33,7 @@ export class RolesController {
 
     updateRoles = async (req: Request, res: Response): Promise<void> => {
         // Logic to update roles
-        const name: string = req.body;
+        const { name } = req.body;
         const id = req.params.id;
 
         const roleUpdated = await this.service.updateRole(id, name);

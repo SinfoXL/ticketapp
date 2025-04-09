@@ -13,11 +13,11 @@ export const roleResolvers = {
         },
     },
     Mutation: {
-        saveRoles: async (_: any, data: Role[]) => {
-            return services.saveRoles(data);
+        saveRoles: async (_: any, args: { roles: Role[] }) => {
+            return services.saveRoles(args.roles);
         },
         updateRole: async (_: any, args: any) => {
-            return services.updateRole(args.id, args.data);
+            return services.updateRole(args.id, args.data.name);
         },
         deleteRole: async (_: any, args: any) => {
             await services.deleteRole(args.id);

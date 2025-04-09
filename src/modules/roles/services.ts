@@ -21,7 +21,7 @@ export class RolesServices {
     };
 
     updateRole = async (id: string, name: string): Promise<Role> => {
-        socketServer.emitToAll('roles', `updateRole-${id}`);
+        socketServer.emitToAll('roles', `updateRole-${id} with name ${name}`);
         return await this.dataAccess.updateRole(id, name);
     };
 

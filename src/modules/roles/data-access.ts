@@ -27,9 +27,10 @@ export class RolesDataAccess {
     };
 
     updateRole = async (id: string, name: string): Promise<Role> => {
+        console.log(`Updating role with id ${id} and name ${name}`);
         const rolesUpdated = await this.db.role.update({
             where: { id },
-            data: name,
+            data: { name },
         });
         return rolesUpdated;
     };
