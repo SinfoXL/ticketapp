@@ -1,13 +1,23 @@
+import { Role } from '../roles/def.types';
+
 export interface User {
     id: string;
     name: string;
     email: string;
-    passwordHash: string;
+    passwordHash: string; // For login, passwordHash is optional
     roleId: string;
-    companyId: string | null; // Cambiado: antes era `string | undefined`
+    role?: Role;
+    companyId: string | null;
     active: boolean;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface UserRegisterRequest {
+    name: string;
+    email: string;
+    password: string;
+    companyId?: string | null;
 }
 
 export interface UserQueryRequest {

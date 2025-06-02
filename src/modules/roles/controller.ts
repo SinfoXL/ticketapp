@@ -24,7 +24,7 @@ export class RolesController {
 
     saveRoles = async (req: Request, res: Response): Promise<void> => {
         // Logic to save roles
-        const body: Role[] = req.body;
+        const body: Role[] = req.body.roles;
         const rolesToSave = body;
 
         const rolesSaved = await this.service.saveRoles(rolesToSave);

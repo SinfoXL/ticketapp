@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from './def.types';
+import { User, UserRegisterRequest } from './def.types';
 import { Created, Ok, NotFound } from '../../helpers/responses';
 import { UsersServices } from './services';
 import { extractPagination, extractFilters } from '../../utils/request-utils';
@@ -40,5 +40,21 @@ export class UsersController {
         const { id } = req.params;
         await this.service.deleteUser(id);
         Ok(res, id);
+    };
+
+    login = async (req: Request, res: Response): Promise<void> => {
+        const { email, password } = req.body;
+        const { accessToken, refreshToken } = await this.service.login(email, password);
+
+        if (!accessToken || !refreshToken) NotFound(res, 'Ha ocurrido un error al iniciar sesión, usaurio o contraseña incorrectos');
+        Ok(res, { accessToken, refreshToken });
+    };
+
+    register = async (req: Request, res: Response): Promise<void> => {
+        const userData: UserRegisterRequest = req.body;
+        const { accessToken, refreshToken } = await this.service.register(userData);
+
+        if (!accessToken || !refreshToken) NotFound(res, 'Ha ocurrido un error al registrar el usuario');
+        Created(res, { accessToken, refreshToken });
     };
 }
