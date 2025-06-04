@@ -69,12 +69,12 @@ export class UsersController {
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 1000 * 60 * 60, // 1 hora
         }).cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
         });
         Ok(res, { accessToken, refreshToken });
@@ -88,12 +88,12 @@ export class UsersController {
         res.cookie('accessToken', accessToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 1000 * 60 * 60, // 1 hora
         }).cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
         });
         Created(res, { accessToken, refreshToken });
