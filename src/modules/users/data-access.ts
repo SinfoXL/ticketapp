@@ -17,6 +17,7 @@ export class UsersDataAccess {
             skip: (page - 1) * limit,
             include: {
                 role: true,
+                Company: true,
             },
         });
     };
@@ -32,6 +33,19 @@ export class UsersDataAccess {
         return await this.db.user.update({
             where: { id },
             data,
+        });
+    };
+
+    changeUserStatus = async (id: string): Promise<User | null> => {
+        const user = await this.db.user.findUnique({
+            where: { id },
+        });
+
+        if (!user) return null;
+
+        return await this.db.user.update({
+            where: { id },
+            data: { active: !user.active },
         });
     };
 
@@ -52,6 +66,18 @@ export class UsersDataAccess {
                 companyId: companyId || null,
                 active: true,
                 roleId: '0dd762fe-5529-4025-ac97-749674b6bccc',
+            },
+        });
+    };
+
+    getUserById = async (id: string): Promise<Partial<User> | null> => {
+        return await this.db.user.findUnique({
+            where: { id },
+            include: {
+                role: true,
+            },
+            omit: {
+                passwordHash: true,
             },
         });
     };

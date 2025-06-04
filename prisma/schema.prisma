@@ -27,7 +27,7 @@ model User {
   comments        TicketComment[]
   attachments     TicketAttachment[]
   historyLogs     TicketHistory[]
-  Company         Company?           @relation(fields: [companyId], references: [id])
+  company         Company?           @relation(fields: [companyId], references: [id])
   companyId       String?
   ProjectClient   ProjectClient[]
   active          Boolean            @default(true)

@@ -21,7 +21,7 @@ export class CompaniesController {
     };
 
     saveCompanies = async (req: Request, res: Response): Promise<void> => {
-        const body: Company[] = req.body;
+        const body: Company[] = req.body.companies;
         const companiesSaved = await this.service.saveCompanies(body);
         Created(res, companiesSaved);
     };

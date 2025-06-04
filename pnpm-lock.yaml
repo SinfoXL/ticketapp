@@ -20,6 +20,9 @@ importers:
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
+      '@types/cookie-parser':
+        specifier: ^1.4.8
+        version: 1.4.8(@types/express@5.0.1)
       '@types/jsonwebtoken':
         specifier: ^9.0.9
         version: 9.0.9
@@ -29,6 +32,9 @@ importers:
       body-parser:
         specifier: ^2.2.0
         version: 2.2.0
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -44,6 +50,9 @@ importers:
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.10.0)
+      js2xmlparser:
+        specifier: ^5.0.0
+        version: 5.0.0
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
@@ -53,6 +62,9 @@ importers:
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1
+      xml2js:
+        specifier: ^0.6.2
+        version: 0.6.2
     devDependencies:
       '@types/body-parser':
         specifier: ^1.19.5
@@ -447,6 +459,11 @@ packages:
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
 
+  '@types/cookie-parser@1.4.8':
+    resolution: {integrity: sha512-l37JqFrOJ9yQfRQkljb41l0xVphc7kg5JTjjr+pLRZ0IyZ49V4BQ8vbF4Ut2C2e+WH4al3xD3ZwYwIUfnbT4NQ==}
+    peerDependencies:
+      '@types/express': '*'
+
   '@types/cors@2.8.17':
     resolution: {integrity: sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==}
 
@@ -581,6 +598,10 @@ packages:
   content-type@1.0.5:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
+
+  cookie-parser@1.4.7:
+    resolution: {integrity: sha512-nGUvgXnotP3BsjiLX2ypbQnWoGUPIIfHQNZkkC668ntrzGWEZVW70HDEB1qnNGMicPje6EttlIgzo51YSwNQGw==}
+    engines: {node: '>= 0.8.0'}
 
   cookie-signature@1.0.6:
     resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
@@ -816,6 +837,9 @@ packages:
   is-promise@4.0.0:
     resolution: {integrity: sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==}
 
+  js2xmlparser@5.0.0:
+    resolution: {integrity: sha512-ckXs0Fzd6icWurbeAXuqo+3Mhq2m8pOPygsQjTPh8K5UWgKaUgDSHrdDxAfexmT11xvBKOQ6sgYwPkYc5RW/bg==}
+
   jsonwebtoken@9.0.2:
     resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
     engines: {node: '>=12', npm: '>=6'}
@@ -1038,6 +1062,9 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  sax@1.4.1:
+    resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
+
   semver@7.7.2:
     resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
@@ -1189,6 +1216,17 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  xml2js@0.6.2:
+    resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
+    engines: {node: '>=4.0.0'}
+
+  xmlbuilder@11.0.1:
+    resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
+    engines: {node: '>=4.0'}
+
+  xmlcreate@2.0.4:
+    resolution: {integrity: sha512-nquOebG4sngPmGPICTS5EnxqhKbCmz5Ox5hsszI2T6U5qdrJizBc+0ilYSEjTSzU0yZcmvppztXe/5Al5fUwdg==}
 
   yn@3.1.1:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
@@ -1513,6 +1551,10 @@ snapshots:
     dependencies:
       '@types/node': 22.14.0
 
+  '@types/cookie-parser@1.4.8(@types/express@5.0.1)':
+    dependencies:
+      '@types/express': 5.0.1
+
   '@types/cors@2.8.17':
     dependencies:
       '@types/node': 22.14.0
@@ -1684,6 +1726,11 @@ snapshots:
       safe-buffer: 5.2.1
 
   content-type@1.0.5: {}
+
+  cookie-parser@1.4.7:
+    dependencies:
+      cookie: 0.7.2
+      cookie-signature: 1.0.6
 
   cookie-signature@1.0.6: {}
 
@@ -1988,6 +2035,10 @@ snapshots:
 
   is-promise@4.0.0: {}
 
+  js2xmlparser@5.0.0:
+    dependencies:
+      xmlcreate: 2.0.4
+
   jsonwebtoken@9.0.2:
     dependencies:
       jws: 3.2.2
@@ -2174,6 +2225,8 @@ snapshots:
   safe-buffer@5.2.1: {}
 
   safer-buffer@2.1.2: {}
+
+  sax@1.4.1: {}
 
   semver@7.7.2: {}
 
@@ -2366,5 +2419,14 @@ snapshots:
   wrappy@1.0.2: {}
 
   ws@8.17.1: {}
+
+  xml2js@0.6.2:
+    dependencies:
+      sax: 1.4.1
+      xmlbuilder: 11.0.1
+
+  xmlbuilder@11.0.1: {}
+
+  xmlcreate@2.0.4: {}
 
   yn@3.1.1: {}

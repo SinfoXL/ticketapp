@@ -1,4 +1,5 @@
 import { Role } from '../roles/def.types';
+import { Company } from '../companies/def.types';
 
 export interface User {
     id: string;
@@ -8,6 +9,7 @@ export interface User {
     roleId: string;
     role?: Role;
     companyId: string | null;
+    company?: Company | null;
     active: boolean;
     createdAt: Date;
     updatedAt: Date;
