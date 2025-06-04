@@ -19,6 +19,7 @@ export const loadRoutes = (app: Express) => {
         if (routePath) {
             const moduleRoutes = require(routePath);
             if (moduleRoutes.default) {
+                console.log('route: ', `/api/${moduleName}`, moduleRoutes.default);
                 app.use(`/api/${moduleName}`, moduleRoutes.default);
             }
         }
