@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { ProjectClientsController as controller } from './controller';
+import { ProjectClientsController as Controller } from './controller';
 import { catcher } from '../../helpers/catcher';
 
-const router = Router();
+const router: Router = Router();
 
-const conroller = new controller();
+const controller = new Controller();
 
-router.get('/', catcher(conroller.getProjectClients));
-router.post('/save', catcher(conroller.saveProjectClients));
-router.patch('/update/:id', catcher(conroller.updateProjectClient));
-router.delete('/delete/:id', catcher(conroller.deleteProjectClient));
+router.get('/', catcher(controller.getProjectClients));
+router.post('/save', catcher(controller.saveProjectClients));
+router.patch('/update/:id', catcher(controller.updateProjectClient));
+router.delete('/delete/:id', catcher(controller.deleteProjectClient));
 
 export default router;

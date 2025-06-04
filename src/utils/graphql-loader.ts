@@ -1,3 +1,5 @@
+import type { IResolvers } from '@graphql-tools/utils';
+
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { mergeResolvers } from '@graphql-tools/merge';
 
@@ -9,4 +11,4 @@ import { roleTypeDefs, roleResolvers } from '../modules/roles/graphql';
 
 // Fusiona los typeDefs y resolvers
 export const typeDefs = mergeTypeDefs([userTypeDefs, companyTypeDefs, ticketTypeDefs, roleTypeDefs, projectTypeDefs]);
-export const resolvers = mergeResolvers([userResolvers, companyResolvers, ticketResolvers, roleResolvers, projectResolvers]);
+export const resolvers: IResolvers = mergeResolvers([userResolvers, companyResolvers, ticketResolvers, roleResolvers, projectResolvers]);

@@ -17,7 +17,7 @@ export class UsersDataAccess {
             skip: (page - 1) * limit,
             include: {
                 role: true,
-                Company: true,
+                company: true,
             },
         });
     };
@@ -29,7 +29,7 @@ export class UsersDataAccess {
         });
     };
 
-    updateUser = async (id: string, data: Partial<User>): Promise<User> => {
+    updateUser = async (id: string, data: any): Promise<User> => {
         return await this.db.user.update({
             where: { id },
             data,

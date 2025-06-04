@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { TicketHistoryController as controller } from './controller';
+import { TicketHistoryController as Controller } from './controller';
 import { catcher } from '../../helpers/catcher';
 
-const router = Router();
+const router: Router = Router();
 
-const conroller = new controller();
+const controller = new Controller();
 
-router.get('/', catcher(conroller.getTicketHistories));
-router.post('/save', catcher(conroller.saveTicketHistories));
-router.patch('/update/:id', catcher(conroller.updateTicketHistory));
-router.delete('/delete/:id', catcher(conroller.deleteTicketHistory));
+router.get('/', catcher(controller.getTicketHistories));
+router.post('/save', catcher(controller.saveTicketHistories));
+router.patch('/update/:id', catcher(controller.updateTicketHistory));
+router.delete('/delete/:id', catcher(controller.deleteTicketHistory));
 
 export default router;

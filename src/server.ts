@@ -10,7 +10,7 @@ const graphqlServer = new GraphQLServer();
 
 const bootstrapGraphqlServer = async () => {
     await graphqlServer.start();
-    
+
     server.listen(config.server.port, () => {
         console.log(`💻 Http Server is running on http://${config.server.host}:${config.server.port}`);
         console.log(`🚀 Graphql Server ready at: ${graphqlServer.url}`);

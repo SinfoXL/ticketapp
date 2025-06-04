@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { CompaniesController as controller } from './controller';
+import { CompaniesController as Controller } from './controller';
 import { catcher } from '../../helpers/catcher';
 
-const router = Router();
+const router: Router = Router();
 
-const conroller = new controller();
+const controller = new Controller();
 
-router.get('/', catcher(conroller.getCompanies));
-router.post('/save', catcher(conroller.saveCompanies));
-router.patch('/update/:id', catcher(conroller.updateCompany));
-router.delete('/delete/:id', catcher(conroller.deleteCompany));
+router.get('/', catcher(controller.getCompanies));
+router.post('/save', catcher(controller.saveCompanies));
+router.patch('/update/:id', catcher(controller.updateCompany));
+router.delete('/delete/:id', catcher(controller.deleteCompany));
 
 export default router;

@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { TicketPriorityController as controller } from './controller';
+import { TicketPriorityController as Controller } from './controller';
 import { catcher } from '../../helpers/catcher';
 
-const router = Router();
+const router: Router = Router();
 
-const conroller = new controller();
+const controller = new Controller();
 
-router.get('/', catcher(conroller.getTicketPriorities));
-router.post('/save', catcher(conroller.saveTicketPriorities));
-router.patch('/update/:id', catcher(conroller.updateTicketPriority));
-router.delete('/delete/:id', catcher(conroller.deleteTicketPriority));
+router.get('/', catcher(controller.getTicketPriorities));
+router.post('/save', catcher(controller.saveTicketPriorities));
+router.patch('/update/:id', catcher(controller.updateTicketPriority));
+router.delete('/delete/:id', catcher(controller.deleteTicketPriority));
 
 export default router;
