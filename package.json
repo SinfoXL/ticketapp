@@ -4,7 +4,20 @@
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/server.js"
   },
-
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.14.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/jsonwebtoken": "^9.0.9",
+    "prisma": "^6.5.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  },
   "dependencies": {
     "@apollo/server": "^4.12.0",
     "@graphql-tools/merge": "^9.0.24",
@@ -22,18 +35,6 @@
     "morgan": "^1.10.0",
     "socket.io": "^4.8.1",
     "js2xmlparser": "^5.0.0",
-    "xml2js": "^0.6.2",
-	"@types/body-parser": "^1.19.5",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.1",
-    "@types/morgan": "^1.9.9",
-    "@types/node": "^22.14.0",
-    "@types/bcrypt": "^5.0.2",
-    "@types/cookie-parser": "^1.4.8",
-    "@types/jsonwebtoken": "^9.0.9",
-    "prisma": "^6.5.0",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
+    "xml2js": "^0.6.2"
   }
 }
