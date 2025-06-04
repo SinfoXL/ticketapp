@@ -4,7 +4,8 @@
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/server.js"
   },
-  "devDependencies": {
+
+  "dependencies": {
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
@@ -16,9 +17,7 @@
     "prisma": "^6.5.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
-  },
-  "dependencies": {
+    "typescript": "^5.8.3",
     "@apollo/server": "^4.12.0",
     "@graphql-tools/merge": "^9.0.24",
     "@graphql-tools/utils": "^10.8.6",
